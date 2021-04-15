@@ -12,8 +12,8 @@ public class Status {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
-	String name;
+	private long id;
+	private String name;
 	
 	public Status(String name) {
 		this.name = name;
@@ -34,5 +34,4 @@ public class Status {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 }

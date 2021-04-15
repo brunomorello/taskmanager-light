@@ -12,7 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 public class StatusModel {
 
 	@Test
-	public void shouldCreateStatus() {
+	public void shouldInitializeStatus() {
 		String statusName = "Test Status";
 		Status status = new Status(statusName);
 		assertNotNull(status);

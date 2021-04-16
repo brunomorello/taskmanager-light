@@ -19,4 +19,8 @@ public class StatusForm {
 		return name;
 	}
 	
+	public Status parse() {
+		return new Status(this.name);
+	}
+	
 }

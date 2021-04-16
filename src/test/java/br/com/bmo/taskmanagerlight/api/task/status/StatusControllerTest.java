@@ -92,14 +92,16 @@ public class StatusControllerTest {
 	}
 	
 	@Test
-	void shouldReturn200AndStatusUpdatedURI() throws Exception {
-		Status status = em.persist(new Status("New"));
-		status.setName("Open");
+	void shouldReturn200AndStatusUpdated() throws Exception {
 		
-		URI uri = new URI(baseURI.concat(String.valueOf(status.getId())));
+		URI uri = new URI(baseURI.concat("1"));
+		
+		Status status = new Status("New");
+		status.setId(1L);
 		
 		mockMvc.perform(put(uri).content(toJsonStr(status)).contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
+			.andDo(log())
 			.andExpect(jsonPath("$.name", equalTo(status.getName())));
 	}
 	

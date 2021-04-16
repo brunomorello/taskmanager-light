@@ -59,7 +59,7 @@ public class StatusController {
 	@PutMapping("/{id}")
 	public ResponseEntity<StatusView> updateStatus(@PathVariable String id, @RequestBody @Valid StatusForm form) {
 		try {
-			Status status = statusService.findById(Long.valueOf(id));
+			Status status = statusService.updateStatus(id, form);
 			return ResponseEntity.ok(new StatusView(status));
 			
 		} catch (Exception e) {

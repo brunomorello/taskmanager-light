@@ -1,5 +1,7 @@
 package br.com.bmo.taskmanagerlight.api.task.status;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -38,5 +40,12 @@ public class StatusService {
 	public void deleteStatus(Status status) {
 		statusRepository.delete(status);
 		
+	}
+
+	public Status updateStatus(String id, @Valid StatusForm form) {
+		Status status = statusRepository.findById(Long.valueOf(id)).orElseThrow(() -> new ResourceNotFoundException("Cannot find Status"));
+		status.setName(form.getName());
+		statusRepository.save(status);
+		return status;
 	}
 }

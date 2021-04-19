@@ -50,10 +50,10 @@ public class StatusController {
 	
 	@PostMapping("/")
 	public ResponseEntity<?> createStatus(@RequestBody @Valid StatusForm form, UriComponentsBuilder uriBuilder) {
-		Status createStatus = statusService.createStatus(form);
+		Status createdStatus = statusService.createStatus(form);
 		
-		URI uri = uriBuilder.path("/api/task/status/{id}").buildAndExpand(createStatus.getId()).toUri();
-		return ResponseEntity.created(uri).body(createStatus);
+		URI uri = uriBuilder.path("/api/task/status/{id}").buildAndExpand(createdStatus.getId()).toUri();
+		return ResponseEntity.created(uri).body(createdStatus);
 	}
 	
 	@PutMapping("/{id}")

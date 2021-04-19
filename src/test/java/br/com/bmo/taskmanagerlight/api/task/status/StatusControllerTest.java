@@ -23,8 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.bmo.taskmanagerlight.shared.util.TaskmanagerTestUtils;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -39,11 +38,11 @@ public class StatusControllerTest {
 	@Autowired
 	private TestEntityManager em;
 	
-	private static String baseURI = "/api/task/status/";
+	private static String BASEURI = "/api/task/status/";
 	
 	@Test
 	void shouldReturn404WhenNoStatusExistsByName() throws Exception {
-		URI uri = new URI(baseURI.concat("XXXXXXX"));
+		URI uri = new URI(BASEURI.concat("XXXXXXX"));
 		mockMvc.perform(get(uri))
 			.andExpect(status().isNotFound());
 	}
@@ -53,7 +52,7 @@ public class StatusControllerTest {
 		Status status = new Status("New");
 		em.persist(status);
 		
-		URI uri = new URI(baseURI.concat("name=".concat(status.getName())));
+		URI uri = new URI(BASEURI.concat("name=".concat(status.getName())));
 		mockMvc.perform(get(uri))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.name", equalTo(status.getName())));
@@ -64,7 +63,7 @@ public class StatusControllerTest {
 		Status status = new Status("New");
 		Status statusPersist = em.persist(status);
 		
-		URI uri = new URI(baseURI.concat(String.valueOf(statusPersist.getId())));
+		URI uri = new URI(BASEURI.concat(String.valueOf(statusPersist.getId())));
 		mockMvc.perform(get(uri))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.id", equalTo(String.valueOf(statusPersist.getId()))));
@@ -72,7 +71,7 @@ public class StatusControllerTest {
 	
 	@Test
 	void shouldReturn200AndAllStatus() throws Exception {
-		URI uri = new URI(baseURI);
+		URI uri = new URI(BASEURI);
 		mockMvc.perform(get(uri))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$..*").exists());
@@ -82,9 +81,9 @@ public class StatusControllerTest {
 	void shouldReturn201AndStatusCreatedURI() throws Exception {
 		StatusForm statusForm = new StatusForm("Reopen");
 		
-		URI uri = new URI(baseURI);
+		URI uri = new URI(BASEURI);
 		
-		mockMvc.perform(post(uri).content(toJsonStr(statusForm)).contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(post(uri).content(TaskmanagerTestUtils.toJsonStr(statusForm)).contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isCreated())
 			.andExpect(jsonPath("$.name").exists())
 			.andExpect(jsonPath("$.name", equalTo(statusForm.getName())));
@@ -94,12 +93,12 @@ public class StatusControllerTest {
 	@Test
 	void shouldReturn200AndStatusUpdated() throws Exception {
 		
-		URI uri = new URI(baseURI.concat("1"));
+		URI uri = new URI(BASEURI.concat("1"));
 		
 		Status status = new Status("New");
 		status.setId(1L);
 		
-		mockMvc.perform(put(uri).content(toJsonStr(status)).contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(put(uri).content(TaskmanagerTestUtils.toJsonStr(status)).contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andDo(log())
 			.andExpect(jsonPath("$.name", equalTo(status.getName())));
@@ -109,16 +108,9 @@ public class StatusControllerTest {
 	void shouldReturn200WhenStatusIsDeleted() throws Exception {
 		Status status = em.persist(new Status("New"));
 		
-		URI uri = new URI(baseURI.concat(String.valueOf(status.getId())));
+		URI uri = new URI(BASEURI.concat(String.valueOf(status.getId())));
 		mockMvc.perform(delete(uri))
 			.andExpect(status().isOk());
 	}
 	
-	public static String toJsonStr(final Object o) {
-		try {
-			return new ObjectMapper().writeValueAsString(o);
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException(e);
-		}
-	}
 }

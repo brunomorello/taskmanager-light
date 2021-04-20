@@ -22,5 +22,9 @@ public class CategoryForm {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public Category parse() {
+		return new Category(getName());
+	}
 	
 }

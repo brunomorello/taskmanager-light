@@ -41,5 +41,9 @@ public class ManufacturerForm {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	public Manufacturer parse() {
+		return new Manufacturer(formalName, displayName, address);
+	}
 	
 }

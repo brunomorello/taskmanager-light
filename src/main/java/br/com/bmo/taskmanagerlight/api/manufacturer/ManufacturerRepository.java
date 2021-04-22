@@ -12,8 +12,10 @@ public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long
 
 	List<Manufacturer> findAll();
 	Optional<Manufacturer> findByFormalName(String formalName);
-	Optional<Manufacturer> findByDisplayName(String displayName);
 	
-	@Query("SELECT m from Manufacturer m WHERE m.address LIKE %:address%")
+	@Query("SELECT m FROM Manufacturer m WHERE m.displayName LIKE %:displayName%")
+	List<Manufacturer> findByDisplayNameLike(String displayName);
+	
+	@Query("SELECT m FROM Manufacturer m WHERE m.address LIKE %:address%")
 	List<Manufacturer> findByAddressLike(String address);
 }

@@ -32,24 +32,33 @@ public class ManufacturerController {
 		}
 	}
 
-	@GetMapping("/")
-	public ResponseEntity<ManufacturerView> findByDisplayName(@Param(value = "displayName") String displayName) {
+	@GetMapping("/search")
+	public ResponseEntity<ManufacturerListView> findQueryParams(@Param(value = "address") String address,
+			@Param(value = "displayName") String displayName) {
 		try {
-			return ResponseEntity.ok(service.findByDisplayName(displayName));
+			// TODO - complex query
+//			if (address != null && displayName != null)
+//				???
+			if (address != null)
+				return ResponseEntity.ok(service.findByAddressLike(address));
+			if (displayName != null)
+				return ResponseEntity.ok(service.findByDisplayNameLike(displayName));
+			
+			return ResponseEntity.notFound().build();
 		} catch (Exception e) {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@PostMapping("/")
 	public ResponseEntity<?> create(@Valid @RequestBody ManufacturerForm form, UriComponentsBuilder uriBuilder) {
-		
+
 		ManufacturerView view = service.createManufacturer(form);
-		
+
 		URI uri = uriBuilder.path("/api/manufacturer/{id}").buildAndExpand(view.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<ManufacturerView> update(@Valid @RequestBody ManufacturerForm form, @PathVariable Long id) {
 		try {

@@ -1,14 +1,10 @@
 package br.com.bmo.taskmanagerlight.api.manufacturer;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,9 +36,9 @@ public class ManufacturerRepositoryTest {
 	
 	@Test
 	void shouldFindManufacturerByDisplayName() {
-		Optional<Manufacturer> acme = repository.findByDisplayName("AC1");
-		assertEquals(acme.isPresent(), true);
-		assertEquals(acme.get().getDisplayName(), "AC1");
+		List<Manufacturer> acmeList = repository.findByDisplayNameLike("AC1");
+		assertNotNull(acmeList.get(0));
+		assertEquals(acmeList.get(0).getDisplayName(), "AC1");
 	}
 	
 	@Test
@@ -60,7 +56,7 @@ public class ManufacturerRepositoryTest {
 	
 	@Test
 	void shouldUpdateManufacturer() {
-		Manufacturer manufacturer = repository.findByDisplayName("AC1").get();
+		Manufacturer manufacturer = repository.findByDisplayNameLike("AC1").get(0);
 		manufacturer.setDisplayName("Test");
 		EM.persist(manufacturer);
 		assertEquals(manufacturer.getDisplayName(), "Test");

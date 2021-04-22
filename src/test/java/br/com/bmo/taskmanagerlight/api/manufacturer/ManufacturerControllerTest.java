@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import br.com.bmo.taskmanagerlight.shared.util.TaskmanagerTestUtils;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -63,6 +62,13 @@ public class ManufacturerControllerTest {
 		mockMvc.perform(get(BASE_URI).param("displayName", ACME.getDisplayName())).andDo(log())
 				.andExpect(status().isOk()).andExpect(jsonPath("$.displayName", equalTo(ACME.getDisplayName())));
 	}
+	
+	@Test
+	void shouldFindManufacturersByAddress() throws Exception {
+		mockMvc.perform(get(BASE_URI).param("address", "Paulista"))
+			.andDo(log())
+			.andExpect(status().isOk());
+	}
 
 	@Test
 	void shouldReturn201WhenManufacturerIsCreated() throws Exception {
@@ -84,11 +90,5 @@ public class ManufacturerControllerTest {
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.displayName", equalTo(ACME.getDisplayName())))
 			.andExpect(jsonPath("$.address", equalTo(ACME.getAddress())));
-	}
-	
-	@Test
-	void shouldReturn200WhenManufactureIsDeleted() throws Exception {
-		mockMvc.perform(delete(BASE_URI.concat(ACME.getId().toString())))
-			.andExpect(status().isOk());
 	}
 }

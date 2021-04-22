@@ -3,4 +3,4 @@ RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-Xmx512m", "-Dspring.profiles.active=dev", "-Dserver.port=${PORT}", "-jar", "/app.jar"]

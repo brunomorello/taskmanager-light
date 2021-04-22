@@ -2,21 +2,37 @@ package br.com.bmo.taskmanagerlight.api.task;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import br.com.bmo.taskmanagerlight.api.task.category.Category;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import br.com.bmo.taskmanagerlight.api.task.status.Status;
 import br.com.bmo.taskmanagerlight.api.user.User;
 
 public abstract class Task {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
 	private String details;
 	private Status status;
-	private Category category;
 	private List<User> owners;
 	private LocalDateTime createdOn;
 	private LocalDateTime updatedOn;
 	private LocalDateTime dueDate;
+	
+	public Task(String title, String details, Status status, LocalDateTime dueDate) {
+		this.title = title;
+		this.details = details;
+		this.status = status;
+		this.dueDate = dueDate;
+		
+		if (getId() == null) {
+			setCreatedOn(LocalDateTime.now());
+		}
+		setUpdatedOn(LocalDateTime.now());
+	}
 	
 	public Long getId() {
 		return id;
@@ -42,12 +58,6 @@ public abstract class Task {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category = category;
-	}
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
 	}
@@ -71,6 +81,10 @@ public abstract class Task {
 	}
 	public void setOwners(List<User> owners) {
 		this.owners = owners;
+	}
+	
+	public void assignTo(User user) {
+		this.owners.add(user);
 	}
 	
 }

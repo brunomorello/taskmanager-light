@@ -3,6 +3,7 @@ package br.com.bmo.taskmanagerlight.api.task.category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.Category;
 import br.com.bmo.taskmanagerlight.api.shared.exceptions.ResourceAlreadyExists;
 import br.com.bmo.taskmanagerlight.api.shared.exceptions.ResourceNotFoundException;
 

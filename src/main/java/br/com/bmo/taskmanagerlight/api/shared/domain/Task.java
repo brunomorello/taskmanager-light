@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.bmo.taskmanagerlight.api.shared.exceptions.DateCannotBeInThePast;
 import br.com.bmo.taskmanagerlight.api.shared.exceptions.InvalidStatusTransition;
 import br.com.bmo.taskmanagerlight.api.user.User;
 
@@ -78,7 +79,7 @@ public abstract class Task {
 	}
 	public void setDueDate(LocalDateTime dueDate) {
 		if (dueDate.isBefore(LocalDateTime.now()))
-			throw new IllegalArgumentException("Due Date must not be in past");
+			throw new DateCannotBeInThePast("Due Date must not be in past");
 		this.dueDate = dueDate;
 	}
 	public List<User> getOwners() {

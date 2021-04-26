@@ -3,6 +3,8 @@ package br.com.bmo.taskmanagerlight.api.task.category;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.Category;
+
 public class CategoryListView {
 
 	private List<Category> categoryList = new ArrayList<>();

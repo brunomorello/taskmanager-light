@@ -3,6 +3,8 @@ package br.com.bmo.taskmanagerlight.api.task.category;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.Category;
+
 public class CategoryForm {
 
 	@NotBlank @NotEmpty

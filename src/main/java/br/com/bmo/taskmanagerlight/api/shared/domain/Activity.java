@@ -2,8 +2,6 @@ package br.com.bmo.taskmanagerlight.api.shared.domain;
 
 import javax.persistence.Entity;
 
-import br.com.bmo.taskmanagerlight.api.task.category.Category;
-
 @Entity
 public class Activity extends Task {
 

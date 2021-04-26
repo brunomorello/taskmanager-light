@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanagerlight.api.task.category;
+package br.com.bmo.taskmanagerlight.api.shared.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

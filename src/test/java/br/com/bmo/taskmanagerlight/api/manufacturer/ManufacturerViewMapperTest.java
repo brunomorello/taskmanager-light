@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.Manufacturer;
+
 public class ManufacturerViewMapperTest {
 
 	private static final Manufacturer SIMPLE_ACME = new Manufacturer("Acme");

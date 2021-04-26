@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.Manufacturer;
 import br.com.bmo.taskmanagerlight.shared.util.TaskmanagerTestUtils;
 
 import static org.hamcrest.Matchers.equalTo;

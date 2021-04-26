@@ -13,6 +13,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.Manufacturer;
+
 @DataJpaTest
 @ActiveProfiles("test")
 public class ManufacturerRepositoryTest {

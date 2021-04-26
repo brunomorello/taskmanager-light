@@ -1,12 +1,15 @@
-package br.com.bmo.taskmanagerlight.api.task;
+package br.com.bmo.taskmanagerlight.api.shared.domain;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import br.com.bmo.taskmanagerlight.api.task.status.Status;
+import br.com.bmo.taskmanagerlight.api.shared.exceptions.InvalidStatusTransition;
 import br.com.bmo.taskmanagerlight.api.user.User;
 
 public abstract class Task {
@@ -16,17 +19,16 @@ public abstract class Task {
 	private Long id;
 	private String title;
 	private String details;
-	private Status status;
-	private List<User> owners;
+	@Enumerated(EnumType.STRING)
+	private Status status = Status.BACKLOG;
+	private List<User> owners = new ArrayList<>();
 	private LocalDateTime createdOn;
 	private LocalDateTime updatedOn;
 	private LocalDateTime dueDate;
 	
-	public Task(String title, String details, Status status, LocalDateTime dueDate) {
+	public Task(String title, String details) {
 		this.title = title;
 		this.details = details;
-		this.status = status;
-		this.dueDate = dueDate;
 		
 		if (getId() == null) {
 			setCreatedOn(LocalDateTime.now());
@@ -55,7 +57,10 @@ public abstract class Task {
 	public Status getStatus() {
 		return status;
 	}
-	public void setStatus(Status status) {
+	public void setStatus(Status status) throws InvalidStatusTransition {
+		if (!getStatus().isValidTransitionTo(status)) 
+			throw new InvalidStatusTransition("Cannot set status to ".concat(status.toString()));
+		
 		this.status = status;
 	}
 	public LocalDateTime getCreatedOn() {

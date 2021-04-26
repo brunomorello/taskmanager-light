@@ -1,4 +1,5 @@
 package br.com.bmo.taskmanagerlight.api.shared.domain;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +80,8 @@ public abstract class Task {
 		return dueDate;
 	}
 	public void setDueDate(LocalDateTime dueDate) {
+		if (dueDate.isBefore(LocalDateTime.now()))
+			throw new IllegalArgumentException("Due Date must not be in past");
 		this.dueDate = dueDate;
 	}
 	public List<User> getOwners() {

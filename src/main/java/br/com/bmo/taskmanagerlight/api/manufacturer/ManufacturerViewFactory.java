@@ -1,5 +1,7 @@
 package br.com.bmo.taskmanagerlight.api.manufacturer;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.Manufacturer;
+
 public class ManufacturerViewFactory {
 
 	ManufacturerView factory(Manufacturer manufacturer) {

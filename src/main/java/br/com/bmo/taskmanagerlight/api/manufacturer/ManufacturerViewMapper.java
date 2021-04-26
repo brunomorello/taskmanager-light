@@ -2,6 +2,7 @@ package br.com.bmo.taskmanagerlight.api.manufacturer;
 
 import org.springframework.stereotype.Component;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.Manufacturer;
 import br.com.bmo.taskmanagerlight.api.shared.utils.Mapper;
 
 @Component

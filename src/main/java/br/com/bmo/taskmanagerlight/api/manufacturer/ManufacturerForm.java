@@ -3,6 +3,8 @@ package br.com.bmo.taskmanagerlight.api.manufacturer;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.Manufacturer;
+
 public class ManufacturerForm {
 
 	private String formalName;

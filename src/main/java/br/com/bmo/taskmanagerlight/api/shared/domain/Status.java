@@ -3,83 +3,40 @@ package br.com.bmo.taskmanagerlight.api.shared.domain;
 import java.util.Arrays;
 import java.util.List;
 
+import br.com.bmo.taskmanagerlight.api.shared.exceptions.InvalidStatusTransition;
+
 public enum Status {
 
 	BACKLOG {
 		@Override
-		public List<Status> nextStatus() {
+		public List<Status> allowedStatusTransition() {
 			return Arrays.asList(DOING, DONE);
-		}
-
-		@Override
-		public List<Status> previousStatus() {
-			return null;
-		}
-
-		@Override
-		public boolean isValidTransitionTo(Status status) {
-			return nextStatus().contains(status);
 		}
 
 	}, DOING {
 		@Override
-		public List<Status> nextStatus() {
-			return Arrays.asList(PENDING, DONE);
-		}
-
-		@Override
-		public List<Status> previousStatus() {
-			return Arrays.asList(BACKLOG);
-		}
-
-		@Override
-		public boolean isValidTransitionTo(Status status) {
-			if (previousStatus().contains(status) || nextStatus().contains(status))
-				return true;
-			return false;
+		public List<Status> allowedStatusTransition() {
+			return Arrays.asList(BACKLOG, PENDING, DONE);
 		}
 
 	}, PENDING {
 		@Override
-		public List<Status> nextStatus() {
-			return Arrays.asList(DOING, DONE);
+		public List<Status> allowedStatusTransition() {
+			return Arrays.asList(BACKLOG, DOING, DONE);
 		}
-
-		@Override
-		public List<Status> previousStatus() {
-			return Arrays.asList(BACKLOG);
-		}
-
-		@Override
-		public boolean isValidTransitionTo(Status status) {
-			if (previousStatus().contains(status) || nextStatus().contains(status))
-				return true;
-			return false;
-		}
-
 	}, DONE {
 		@Override
-		public List<Status> nextStatus() {
-			return null;
+		public List<Status> allowedStatusTransition() {
+			return Arrays.asList(BACKLOG, DOING);
 		}
-
-		@Override
-		public List<Status> previousStatus() {
-			return Arrays.asList(DOING, BACKLOG);
-		}
-
-		@Override
-		public boolean isValidTransitionTo(Status status) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
 	};
 
-	public abstract List<Status> nextStatus(); 
+	public abstract List<Status> allowedStatusTransition(); 
 
-	public abstract List<Status> previousStatus();
-	
-	public abstract boolean isValidTransitionTo(Status status);
+	public Status isValidTransitionTo(Status status) throws InvalidStatusTransition {
+		if (!allowedStatusTransition().contains(status))
+			throw new InvalidStatusTransition("Cannot set status to ".concat(status.toString()));
+		return status;
+	}
 	
 }

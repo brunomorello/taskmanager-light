@@ -1,5 +1,4 @@
 package br.com.bmo.taskmanagerlight.api.shared.domain;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ public abstract class Task {
 	private String title;
 	private String details;
 	@Enumerated(EnumType.STRING)
-	private Status status = Status.BACKLOG;
+	private Status status;
 	private List<User> owners = new ArrayList<>();
 	private LocalDateTime createdOn;
 	private LocalDateTime updatedOn;
@@ -30,6 +29,7 @@ public abstract class Task {
 	public Task(String title, String details) {
 		this.title = title;
 		this.details = details;
+		this.status = Status.BACKLOG;
 		
 		if (getId() == null) {
 			setCreatedOn(LocalDateTime.now());
@@ -59,10 +59,7 @@ public abstract class Task {
 		return status;
 	}
 	public void setStatus(Status status) throws InvalidStatusTransition {
-		if (!getStatus().isValidTransitionTo(status)) 
-			throw new InvalidStatusTransition("Cannot set status to ".concat(status.toString()));
-		
-		this.status = status;
+		this.status = getStatus().isValidTransitionTo(status);
 	}
 	public LocalDateTime getCreatedOn() {
 		return createdOn;

@@ -57,6 +57,31 @@ class TaskTest {
 	}
 	
 	@Test
+	void shoulDoneActivityChangeToDoing() throws InvalidStatusTransition {
+		activity.setStatus(Status.DOING);
+		assertEquals(activity.getStatus(), Status.DOING);
+		
+		activity.setStatus(Status.DONE);
+		assertEquals(activity.getStatus(), Status.DONE);
+		
+		activity.setStatus(Status.DOING);
+		assertEquals(activity.getStatus(), Status.DOING);
+	}
+	
+	@Test
+	void shouldNotChangeStatusOfDoneActivityToPending() throws InvalidStatusTransition {
+		activity.setStatus(Status.DOING);
+		assertEquals(activity.getStatus(), Status.DOING);
+		
+		activity.setStatus(Status.DONE);
+		assertEquals(activity.getStatus(), Status.DONE);
+		
+		assertThrows(InvalidStatusTransition.class, () -> {
+			activity.setStatus(Status.PENDING);
+		});
+	}
+	
+	@Test
 	void shouldNotDueDateIsInThePast() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			LocalDateTime past = LocalDateTime.now().minusDays(1);

@@ -1,19 +1,16 @@
-package br.com.bmo.taskmanagerlight.api.task;
-
-import java.time.LocalDateTime;
+package br.com.bmo.taskmanagerlight.api.shared.domain;
 
 import javax.persistence.Entity;
 
 import br.com.bmo.taskmanagerlight.api.task.category.Category;
-import br.com.bmo.taskmanagerlight.api.task.status.Status;
 
 @Entity
 public class Activity extends Task {
 
 	private Category category;
 	
-	public Activity(String title, String details, Status status, LocalDateTime dueDate, Category category) {
-		super(title, details, status, dueDate);
+	public Activity(String title, String details, Category category) {
+		super(title, details);
 		this.category = category;
 	}
 

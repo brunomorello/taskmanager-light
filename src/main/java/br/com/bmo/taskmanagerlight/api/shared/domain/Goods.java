@@ -6,7 +6,6 @@ public abstract class Goods {
 
 	private String name;
 	private BigDecimal price;
-	private BigDecimal quantity;
 	
 	public Goods(String name) {
 		this.name = name;
@@ -27,24 +26,12 @@ public abstract class Goods {
 		this.price = price;
 	}
 
-	public BigDecimal getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(BigDecimal quantity) {
-		if (quantity.compareTo(BigDecimal.ZERO) < 0) {
-			throw new NumberFormatException("Quantity cannot be negative");
-		}
-		this.quantity = quantity;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		return result;
 	}
 
@@ -67,12 +54,7 @@ public abstract class Goods {
 				return false;
 		} else if (!price.equals(other.price))
 			return false;
-		if (quantity == null) {
-			if (other.quantity != null)
-				return false;
-		} else if (!quantity.equals(other.quantity))
-			return false;
 		return true;
 	}
-	
+
 }

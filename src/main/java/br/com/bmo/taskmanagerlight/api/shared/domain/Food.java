@@ -9,9 +9,8 @@ public class Food extends Goods {
 
 	private LocalDate expirationDate;
 	
-	public Food(String name, BigDecimal quantity, BigDecimal price) {
+	public Food(String name, BigDecimal price) {
 		super(name);
-		this.setQuantity(quantity);
 		this.setPrice(price);
 	}
 

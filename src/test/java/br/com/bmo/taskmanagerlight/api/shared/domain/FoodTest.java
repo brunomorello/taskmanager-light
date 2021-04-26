@@ -16,7 +16,7 @@ class FoodTest {
 	
 	@BeforeEach
 	void setup() {
-		food = new Food("Bread", new BigDecimal("2"), new BigDecimal("0.70"));
+		food = new Food("Bread", new BigDecimal("0.70"));
 	}
 
 	@Test

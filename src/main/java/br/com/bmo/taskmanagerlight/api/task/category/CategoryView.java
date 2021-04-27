@@ -1,6 +1,6 @@
 package br.com.bmo.taskmanagerlight.api.task.category;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.Category;
+import br.com.bmo.taskmanagerlight.api.shared.domain.task.Category;
 
 public class CategoryView {
 

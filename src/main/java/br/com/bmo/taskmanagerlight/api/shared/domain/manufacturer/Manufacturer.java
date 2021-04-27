@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanagerlight.api.shared.domain;
+package br.com.bmo.taskmanagerlight.api.shared.domain.manufacturer;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

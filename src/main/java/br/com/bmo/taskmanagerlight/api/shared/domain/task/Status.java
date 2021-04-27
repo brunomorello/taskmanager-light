@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanagerlight.api.shared.domain;
+package br.com.bmo.taskmanagerlight.api.shared.domain.task;
 
 import java.util.Arrays;
 import java.util.List;

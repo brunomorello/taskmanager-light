@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.Manufacturer;
+import br.com.bmo.taskmanagerlight.api.shared.domain.manufacturer.Manufacturer;
 
 @Repository
 public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long>{

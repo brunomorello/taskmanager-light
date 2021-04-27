@@ -2,7 +2,7 @@ package br.com.bmo.taskmanagerlight.api.manufacturer;
 
 import java.util.List;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.Manufacturer;
+import br.com.bmo.taskmanagerlight.api.shared.domain.manufacturer.Manufacturer;
 
 public class ManufacturerListView {
 

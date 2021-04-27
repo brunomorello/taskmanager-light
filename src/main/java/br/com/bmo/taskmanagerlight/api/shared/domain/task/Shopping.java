@@ -1,10 +1,12 @@
-package br.com.bmo.taskmanagerlight.api.shared.domain;
+package br.com.bmo.taskmanagerlight.api.shared.domain.task;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 import javax.persistence.Entity;
+
+import br.com.bmo.taskmanagerlight.api.shared.domain.goods.Goods;
 
 @Entity
 public class Shopping extends Task {
@@ -20,7 +22,7 @@ public class Shopping extends Task {
 	}
 
 	public List<Goods> getProducts() {
-		return new ArrayList<>(products);
+		return this.products;
 	}
 
 	public int getListSize() {

@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.task.Activity;
+import br.com.bmo.taskmanagerlight.api.shared.domain.task.Category;
+
 class ActivityTest {
 	
 private static Activity activity;

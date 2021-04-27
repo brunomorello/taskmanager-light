@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanagerlight.api.shared.domain;
+package br.com.bmo.taskmanagerlight.api.shared.domain.task;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

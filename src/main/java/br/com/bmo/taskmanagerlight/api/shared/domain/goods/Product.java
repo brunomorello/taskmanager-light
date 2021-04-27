@@ -1,4 +1,6 @@
-package br.com.bmo.taskmanagerlight.api.shared.domain;
+package br.com.bmo.taskmanagerlight.api.shared.domain.goods;
+
+import br.com.bmo.taskmanagerlight.api.shared.domain.manufacturer.Manufacturer;
 
 public class Product extends Goods {
 

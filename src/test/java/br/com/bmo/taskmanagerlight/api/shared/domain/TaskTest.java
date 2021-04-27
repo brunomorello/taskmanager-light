@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.task.Activity;
+import br.com.bmo.taskmanagerlight.api.shared.domain.task.Status;
 import br.com.bmo.taskmanagerlight.api.shared.exceptions.InvalidStatusTransition;
 
 class TaskTest {

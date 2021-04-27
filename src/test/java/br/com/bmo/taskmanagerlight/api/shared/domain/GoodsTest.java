@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import br.com.bmo.taskmanagerlight.api.shared.domain.goods.Food;
+import br.com.bmo.taskmanagerlight.api.shared.domain.goods.Goods;
+
 class GoodsTest {
 	
 	private static Goods product;

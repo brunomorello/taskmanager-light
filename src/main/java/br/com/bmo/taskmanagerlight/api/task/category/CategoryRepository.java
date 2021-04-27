@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.Category;
+import br.com.bmo.taskmanagerlight.api.shared.domain.task.Category;
 
 @Repository
 @Profile(value = { "test", "prod", "qas", "dev" })

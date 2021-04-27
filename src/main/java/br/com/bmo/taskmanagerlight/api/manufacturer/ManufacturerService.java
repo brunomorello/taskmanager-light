@@ -7,8 +7,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.manufacturer.Manufacturer;
-import br.com.bmo.taskmanagerlight.api.shared.exceptions.ResourceNotFoundException;
+import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
+import br.com.bmo.taskmanagerlight.shared.exceptions.ResourceNotFoundException;
 
 @Service
 public class ManufacturerService {

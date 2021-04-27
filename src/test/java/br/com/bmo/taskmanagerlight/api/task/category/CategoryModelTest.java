@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.task.Category;
+import br.com.bmo.taskmanagerlight.shared.domain.task.Category;
 
 @ActiveProfiles("test")
 public class CategoryModelTest {

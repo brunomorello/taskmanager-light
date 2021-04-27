@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.manufacturer.Manufacturer;
+import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
 
 public class ManufacturerViewMapperTest {
 

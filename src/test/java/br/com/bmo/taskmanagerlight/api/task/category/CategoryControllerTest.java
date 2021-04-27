@@ -24,8 +24,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.task.Category;
+import br.com.bmo.taskmanagerlight.shared.domain.task.Category;
 import br.com.bmo.taskmanagerlight.shared.util.TaskmanagerTestUtils;
+import br.com.bmo.taskmanagerlight.task.category.CategoryForm;
 
 @SpringBootTest
 @AutoConfigureMockMvc

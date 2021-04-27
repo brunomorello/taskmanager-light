@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.goods.Product;
-import br.com.bmo.taskmanagerlight.api.shared.domain.manufacturer.Manufacturer;
+import br.com.bmo.taskmanagerlight.shared.domain.goods.Product;
+import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
 
 class ProductTest {
 

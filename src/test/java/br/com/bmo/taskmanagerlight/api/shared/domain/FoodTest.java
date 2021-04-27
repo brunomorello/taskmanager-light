@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.goods.Food;
-import br.com.bmo.taskmanagerlight.api.shared.exceptions.DateCannotBeInThePast;
+import br.com.bmo.taskmanagerlight.shared.domain.goods.Food;
+import br.com.bmo.taskmanagerlight.shared.exceptions.DateCannotBeInThePast;
 
 class FoodTest {
 

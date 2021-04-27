@@ -2,8 +2,8 @@ package br.com.bmo.taskmanagerlight.api.manufacturer;
 
 import org.springframework.stereotype.Component;
 
-import br.com.bmo.taskmanagerlight.api.shared.domain.manufacturer.Manufacturer;
-import br.com.bmo.taskmanagerlight.api.shared.utils.Mapper;
+import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
+import br.com.bmo.taskmanagerlight.shared.utils.Mapper;
 
 @Component
 public class ManufacturerViewMapper implements Mapper<Manufacturer, ManufacturerView> {

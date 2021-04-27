@@ -1,7 +1,10 @@
 package br.com.bmo.taskmanagerlight.shared.domain.goods;
 
+import javax.persistence.Entity;
+
 import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
 
+@Entity
 public class Product extends Goods {
 
 	private Manufacturer manufacturer;

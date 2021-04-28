@@ -1,5 +1,7 @@
 package br.com.bmo.taskmanagerlight.shared.domain.goods;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 
 import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
@@ -9,8 +11,14 @@ public class Product extends Goods {
 
 	private Manufacturer manufacturer;
 	
-	public Product(String name) {
+	public Product(String name, BigDecimal price) {
 		super(name);
+		this.setPrice(price);
+	}
+	
+	public Product(String name, Manufacturer manufacturer) {
+		super(name);
+		this.manufacturer =  manufacturer;
 	}
 
 	public Manufacturer getManufacturer() {

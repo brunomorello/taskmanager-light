@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanagerlight.api.manufacturer;
+package br.com.bmo.taskmanagerlight.api.shared.integration;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import br.com.bmo.taskmanagerlight.api.manufacturer.ManufacturerForm;
 import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
 import br.com.bmo.taskmanagerlight.shared.util.TaskmanagerTestUtils;
 

@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanagerlight.api.manufacturer;
+package br.com.bmo.taskmanagerlight.api.shared.repository;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 
+import br.com.bmo.taskmanagerlight.api.manufacturer.ManufacturerRepository;
 import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
 
 @DataJpaTest
@@ -35,7 +36,7 @@ public class ManufacturerRepositoryTest {
 		EM.persist(acme2);
 		EM.persist(acme3);
 	}
-	
+
 	@Test
 	void shouldFindManufacturerByDisplayName() {
 		List<Manufacturer> acmeList = repository.findByDisplayNameLike("AC1");
@@ -63,4 +64,5 @@ public class ManufacturerRepositoryTest {
 		EM.persist(manufacturer);
 		assertEquals(manufacturer.getDisplayName(), "Test");
 	}
+
 }

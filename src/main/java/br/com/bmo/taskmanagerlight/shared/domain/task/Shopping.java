@@ -5,17 +5,21 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 import br.com.bmo.taskmanagerlight.shared.domain.goods.Goods;
 
 @Entity
 public class Shopping extends Task {
 
+	@ManyToMany
 	private List<Goods> products = new ArrayList<>();
 
 	public Shopping(String title, String details) {
 		super(title, details);
 	}
+	
+	public Shopping() { }
 
 	public void addProduct(Goods p) {
 		products.add(p);

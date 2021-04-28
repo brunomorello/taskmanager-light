@@ -1,18 +1,22 @@
 package br.com.bmo.taskmanagerlight.shared.domain.task;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
-import br.com.bmo.taskmanagerlight.shared.domain.User;
 import br.com.bmo.taskmanagerlight.shared.exceptions.DateCannotBeInThePast;
 import br.com.bmo.taskmanagerlight.shared.exceptions.InvalidStatusTransition;
 
+@Entity
+@Table(name = "tasks")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Task {
 
 	@Id
@@ -22,7 +26,7 @@ public abstract class Task {
 	private String details;
 	@Enumerated(EnumType.STRING)
 	private Status status;
-	private List<User> owners = new ArrayList<>();
+//	private List<User> owners = new ArrayList<>();
 	private LocalDateTime createdOn;
 	private LocalDateTime updatedOn;
 	private LocalDateTime dueDate;
@@ -37,6 +41,8 @@ public abstract class Task {
 		}
 		setUpdatedOn(LocalDateTime.now());
 	}
+	
+	public Task() { }
 	
 	public Long getId() {
 		return id;
@@ -82,15 +88,15 @@ public abstract class Task {
 			throw new DateCannotBeInThePast("Due Date must not be in past");
 		this.dueDate = dueDate;
 	}
-	public List<User> getOwners() {
-		return owners;
-	}
-	public void setOwners(List<User> owners) {
-		this.owners = owners;
-	}
-	
-	public void assignTo(User user) {
-		this.owners.add(user);
-	}
+//	public List<User> getOwners() {
+//		return owners;
+//	}
+//	public void setOwners(List<User> owners) {
+//		this.owners = owners;
+//	}
+//	
+//	public void assignTo(User user) {
+//		this.owners.add(user);
+//	}
 	
 }

@@ -16,7 +16,13 @@ public class Food extends Goods {
 		super(name);
 		this.setPrice(price);
 	}
-
+	
+	public Food(String name, BigDecimal price, LocalDate expirationDate) {
+		super(name);
+		this.setPrice(price);
+		this.setExpirationDate(expirationDate);
+	}
+	
 	public LocalDate getExpirationDate() {
 		return expirationDate;
 	}

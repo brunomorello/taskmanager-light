@@ -6,11 +6,11 @@ import java.time.format.DateTimeFormatter;
 
 import javax.validation.constraints.NotBlank;
 
-import br.com.bmo.taskmanagerlight.api.goods.GoodsFom;
+import br.com.bmo.taskmanagerlight.api.goods.GoodsForm;
 import br.com.bmo.taskmanagerlight.shared.domain.goods.Food;
 import br.com.bmo.taskmanagerlight.shared.domain.goods.Goods;
 
-public class FoodForm extends GoodsFom {
+public class FoodForm extends GoodsForm {
 	
 	private String expirationDate;
 	

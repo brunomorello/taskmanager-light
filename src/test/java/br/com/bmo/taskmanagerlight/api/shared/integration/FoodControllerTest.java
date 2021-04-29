@@ -1,6 +1,12 @@
 package br.com.bmo.taskmanagerlight.api.shared.integration;
 
-import static org.junit.Assert.fail;
+import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,15 +27,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import br.com.bmo.taskmanagerlight.api.goods.food.FoodForm;
 import br.com.bmo.taskmanagerlight.shared.domain.goods.Food;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import br.com.bmo.taskmanagerlight.shared.util.TaskmanagerTestUtils;
 
 @SpringBootTest
@@ -72,16 +69,22 @@ public class FoodControllerTest {
 	
 	@Test
 	void shouldReturn201WhenFoodIsCreated() throws Exception {
-		
-		String payload = TaskmanagerTestUtils.toJsonStr(new FoodForm("Pasta", "2.50", "2020-06-01"));
-		
-		mockMvc.perform(post(BASE_URI).content(payload).contentType(MediaType.APPLICATION_JSON))
+		String payload = TaskmanagerTestUtils.toJsonStr(new FoodForm("Pasta", "2.50"));
+		mockMvc.perform(
+				post(BASE_URI)
+					.content(payload)
+					.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isCreated());
 	}
 	
 	@Test
 	void shouldReturn200WhenFoodIsUpdated() throws Exception  {
-		mockMvc.perform(put(BASE_URI + FOOD.getId()))
+		String payload = TaskmanagerTestUtils.toJsonStr(new FoodForm("Rice", "22", "2021-06-01"));
+		
+		mockMvc.perform(
+				put(BASE_URI + FOOD.getId())
+					.content(payload)
+					.contentType(MediaType.APPLICATION_JSON))
 			.andDo(log())
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.name", equalTo("Rice")));

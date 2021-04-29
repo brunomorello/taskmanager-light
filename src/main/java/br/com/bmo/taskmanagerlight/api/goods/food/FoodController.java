@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,19 +55,23 @@ public class FoodController implements GoodsController {
 	}
 
 	@PutMapping("{id}")
-	public ResponseEntity<GoodsView> update(@Valid FoodsForm form, Long id) {
-		// TODO Auto-generated method stub
-		return ResponseEntity.notFound().build();
+	public ResponseEntity<GoodsView> update(@Valid @RequestBody FoodForm form, @PathVariable Long id) {
+		
+		try {
+			service.setViewFactory(new FoodViewFactory());
+			GoodsView foodUpdated = service.update(form, id);
+			return ResponseEntity.ok(foodUpdated);
+			
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
+		
 	}
 
 	@PostMapping
-	public ResponseEntity<?> create(@Valid @RequestBody FoodsForm form, BindingResult results, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<?> create(@Valid @RequestBody FoodForm form, UriComponentsBuilder uriBuilder) {
 		
-		if (results.hasErrors()) {
-			System.out.println(results);
-		}
-		
-		Goods foodCreated = service.save(form);
+		Goods foodCreated = service.create(form);
 		URI uri = uriBuilder.path("/api/food/{id}").buildAndExpand(foodCreated.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build();

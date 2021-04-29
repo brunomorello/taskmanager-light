@@ -27,7 +27,10 @@ public class FoodsForm extends GoodsForm {
 
 	@Override
 	public Goods parse() {
-		return new Food(getName(), new BigDecimal(getPrice()), LocalDate.parse(expirationDate, DateTimeFormatter.ISO_DATE));
+		Food food = new Food(getName(), new BigDecimal(getPrice()));
+		if (expirationDate != null)
+			food.setExpirationDate(LocalDate.parse(expirationDate, DateTimeFormatter.ISO_DATE));
+		return food;
 	}
 
 	public String getExpirationDate() {
@@ -37,7 +40,5 @@ public class FoodsForm extends GoodsForm {
 	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
-	
-	
 
 }

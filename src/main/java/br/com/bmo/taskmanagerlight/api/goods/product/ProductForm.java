@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 import javax.validation.constraints.NotBlank;
 
-import br.com.bmo.taskmanagerlight.api.goods.GoodsFom;
+import br.com.bmo.taskmanagerlight.api.goods.GoodsForm;
 import br.com.bmo.taskmanagerlight.shared.domain.goods.Goods;
 import br.com.bmo.taskmanagerlight.shared.domain.goods.Product;
 import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
 
-public class ProductForm extends GoodsFom {
+public class ProductForm extends GoodsForm {
 
 	private String manufacturer;
 	

@@ -127,5 +127,11 @@ public class Manufacturer {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Manufacturer [id=" + id + ", formalName=" + formalName + ", displayName=" + displayName + ", address="
+				+ address + ", status=" + status + "]";
+	}
 	
 }

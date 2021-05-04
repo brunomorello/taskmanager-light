@@ -30,9 +30,13 @@ public class Product extends Goods {
 		this.setPrice(price);
 	}
 	
-	public Product(String name, Manufacturer manufacturer) {
+	public Product(String name, BigDecimal price, Manufacturer manufacturer) {
 		super(name);
+		this.setPrice(price);
 		this.manufacturer =  manufacturer;
+	}
+	
+	public Product() {
 	}
 
 	public Manufacturer getManufacturer() {
@@ -41,6 +45,14 @@ public class Product extends Goods {
 
 	public void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;
+	}
+	
+	public List<Shopping> getShoppingTask() {
+		return shoppingTask;
+	}
+
+	public void setShoppingTask(List<Shopping> shoppingTask) {
+		this.shoppingTask = shoppingTask;
 	}
 
 	@Override

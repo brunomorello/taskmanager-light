@@ -23,6 +23,8 @@ public class Food extends Goods {
 		this.setExpirationDate(expirationDate);
 	}
 	
+	public Food() { }
+	
 	public LocalDate getExpirationDate() {
 		return expirationDate;
 	}

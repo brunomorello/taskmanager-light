@@ -54,6 +54,13 @@ public class FoodControllerTest {
 	}
 	
 	@Test
+	void shouldReturn200AndAllGoodsList() throws Exception {
+		mockMvc.perform(get(BASE_URI))
+			.andDo(log())
+			.andExpect(status().isOk());
+	}
+	
+	@Test
 	void shouldReturn200ToFindFoodById() throws Exception {
 		mockMvc.perform(get(BASE_URI + FOOD.getId()))
 			.andDo(log())
@@ -87,6 +94,8 @@ public class FoodControllerTest {
 					.contentType(MediaType.APPLICATION_JSON))
 			.andDo(log())
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.name", equalTo("Rice")));
+			.andExpect(jsonPath("$.name", equalTo("Rice")))
+			.andExpect(jsonPath("$.price", equalTo("22")))
+			.andExpect(jsonPath("$.expirationDate", equalTo("2021-06-01")));
 	}
 }

@@ -1,11 +1,11 @@
 package br.com.bmo.taskmanagerlight.api.manufacturer;
 
 import java.net.URI;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -33,21 +34,9 @@ public class ManufacturerController {
 	}
 
 	@GetMapping("/search")
-	public ResponseEntity<ManufacturerListView> findQueryParams(@Param(value = "address") String address,
-			@Param(value = "displayName") String displayName) {
-		try {
-			// TODO - complex query
-//			if (address != null && displayName != null)
-//				???
-			if (address != null)
-				return ResponseEntity.ok(service.findByAddressLike(address));
-			if (displayName != null)
-				return ResponseEntity.ok(service.findByDisplayNameLike(displayName));
-			
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.notFound().build();
-		}
+	public ResponseEntity<ManufacturerListView> findQueryParams(@RequestParam Map<String, String> queryMap) {
+		service.findByQueryParams(queryMap);
+		return ResponseEntity.notFound().build();
 	}
 
 	@PostMapping("/")

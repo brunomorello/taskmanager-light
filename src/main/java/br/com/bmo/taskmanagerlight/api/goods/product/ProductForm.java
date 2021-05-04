@@ -11,21 +11,28 @@ import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
 
 public class ProductForm extends GoodsForm {
 
-	private String manufacturer;
+	private Manufacturer manufacturer;
 	
-	public ProductForm(@NotBlank String name, String price, String manufacturer) {
+	public ProductForm(@NotBlank String name, String price, Manufacturer manufacturer) {
 		super(name, price);
 		this.manufacturer = manufacturer;
 	}
+	
+	public ProductForm(@NotBlank String name, String price) {
+		super(name, price);
+	}
+	
+	public ProductForm() { }
 
-	public String getManufacturer() {
+	public Manufacturer getManufacturer() {
 		return manufacturer;
 	}
 
 	@Override
 	public Goods parse() {
 		Product product = new Product(getName(), new BigDecimal(getPrice()));
-		product.setManufacturer(new Manufacturer(manufacturer));
+		if (manufacturer != null)
+			product.setManufacturer(manufacturer);
 		return product;
 	}
 	

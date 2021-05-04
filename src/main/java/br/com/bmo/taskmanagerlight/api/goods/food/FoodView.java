@@ -6,8 +6,8 @@ public class FoodView extends GoodsView{
 
 	private String expirationDate;
 
-	public FoodView(String name, String price, String expirationDate) {
-		super(name, price);
+	public FoodView(String id, String name, String price, String expirationDate) {
+		super(id, name, price);
 		this.expirationDate = expirationDate;
 	}
 

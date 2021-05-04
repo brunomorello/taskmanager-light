@@ -23,6 +23,8 @@ public abstract class Goods {
 	private String name;
 	private BigDecimal price;
 	
+	public Goods() {}
+	
 	public Long getId() {
 		return id;
 	}

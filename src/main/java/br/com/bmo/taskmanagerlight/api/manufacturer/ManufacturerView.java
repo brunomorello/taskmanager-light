@@ -1,5 +1,7 @@
 package br.com.bmo.taskmanagerlight.api.manufacturer;
 
+import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
+
 public class ManufacturerView {
 
 	private String id;
@@ -14,6 +16,14 @@ public class ManufacturerView {
 		this.displayName = displayName;
 		this.address = address;
 		this.status = status;
+	}
+	
+	public ManufacturerView(Manufacturer manufacturer) {
+		this.id = manufacturer.getId().toString();
+		this.formalName = manufacturer.getFormalName();
+		this.displayName = manufacturer.getDisplayName();
+		this.address = manufacturer.getAddress();
+		this.status = manufacturer.getStatus().toString();
 	}
 	
 	public ManufacturerView() { }

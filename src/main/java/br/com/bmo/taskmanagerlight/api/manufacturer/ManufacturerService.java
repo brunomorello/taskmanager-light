@@ -1,6 +1,8 @@
 package br.com.bmo.taskmanagerlight.api.manufacturer;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -50,6 +52,11 @@ public class ManufacturerService {
 			throw new ResourceNotFoundException("Cannot find manufacturers");
 		
 		return new ManufacturerListView(manufacturersFoundByAddress);
+	}
+
+	public ManufacturerListView findByQueryParams(Map<String, String> queryMap) {
+		List<Manufacturer> manufacturers = new ArrayList<>();
+		return new ManufacturerListView(manufacturers);
 	}
 	
 }

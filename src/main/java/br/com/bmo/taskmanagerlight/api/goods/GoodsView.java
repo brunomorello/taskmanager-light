@@ -2,10 +2,12 @@ package br.com.bmo.taskmanagerlight.api.goods;
 
 public class GoodsView {
 
+	private String id;
 	private String name;
 	private String price;
 	
-	public GoodsView(String name, String price) {
+	public GoodsView(String id, String name, String price) {
+		this.id = id;
 		this.name = name;
 		this.price = price;
 	}
@@ -15,5 +17,8 @@ public class GoodsView {
 	}
 	public String getPrice() {
 		return price;
+	}
+	public String getId() {
+		return id;
 	}
 }

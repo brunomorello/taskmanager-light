@@ -9,7 +9,11 @@ public class FoodViewFactory implements GoodsViewFactory {
 	@Override
 	public FoodView factory(Goods goods) {
 		Food food = (Food) goods;
-		return new FoodView(food.getName(), food.getPrice().toString(), food.getExpirationDate().toString());
+		return new FoodView(
+				food.getId().toString(),
+				food.getName(), 
+				food.getPrice().toString(), 
+				food.getExpirationDate().toString());
 	}
 	
 }

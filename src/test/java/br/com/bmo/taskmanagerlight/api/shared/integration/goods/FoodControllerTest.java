@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanagerlight.api.shared.integration;
+package br.com.bmo.taskmanagerlight.api.shared.integration.goods;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

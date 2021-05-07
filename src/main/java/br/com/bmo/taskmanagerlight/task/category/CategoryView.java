@@ -15,21 +15,14 @@ public class CategoryView {
 	public CategoryView() {	}
 	
 	public CategoryView(Category category) {
-		this.id = category.getId().toString();
+		this.id = category.getId() + "";
 		this.name = category.getName();
 	}
 
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 }

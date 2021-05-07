@@ -1,6 +1,7 @@
 package br.com.bmo.taskmanagerlight.shared.domain.task;
 import java.time.LocalDateTime;
 
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,6 +18,7 @@ import br.com.bmo.taskmanagerlight.shared.exceptions.InvalidStatusTransition;
 @Entity
 @Table(name = "tasks")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "task_type")
 public abstract class Task {
 
 	@Id
@@ -26,7 +28,6 @@ public abstract class Task {
 	private String details;
 	@Enumerated(EnumType.STRING)
 	private Status status;
-//	private List<User> owners = new ArrayList<>();
 	private LocalDateTime createdOn;
 	private LocalDateTime updatedOn;
 	private LocalDateTime dueDate;
@@ -88,15 +89,4 @@ public abstract class Task {
 			throw new DateCannotBeInThePast("Due Date must not be in past");
 		this.dueDate = dueDate;
 	}
-//	public List<User> getOwners() {
-//		return owners;
-//	}
-//	public void setOwners(List<User> owners) {
-//		this.owners = owners;
-//	}
-//	
-//	public void assignTo(User user) {
-//		this.owners.add(user);
-//	}
-	
 }

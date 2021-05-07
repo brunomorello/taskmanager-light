@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanagerlight.task.category;
+package br.com.bmo.taskmanagerlight.api.task.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

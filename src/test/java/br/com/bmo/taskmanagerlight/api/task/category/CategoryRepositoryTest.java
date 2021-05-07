@@ -15,7 +15,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.bmo.taskmanagerlight.shared.domain.task.Category;
-import br.com.bmo.taskmanagerlight.task.category.CategoryRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

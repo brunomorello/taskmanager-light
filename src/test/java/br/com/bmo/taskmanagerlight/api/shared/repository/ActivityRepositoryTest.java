@@ -9,10 +9,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.bmo.taskmanagerlight.api.task.activity.ActivityRepository;
+import br.com.bmo.taskmanagerlight.api.task.category.CategoryRepository;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Activity;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Category;
 import br.com.bmo.taskmanagerlight.shared.exceptions.ResourceNotFoundException;
-import br.com.bmo.taskmanagerlight.task.category.CategoryRepository;
 
 @DataJpaTest
 @ActiveProfiles("test")

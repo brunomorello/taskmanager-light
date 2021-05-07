@@ -3,8 +3,8 @@ package br.com.bmo.taskmanagerlight.api.task.activity;
 import java.time.format.DateTimeFormatter;
 
 import br.com.bmo.taskmanagerlight.api.task.TaskDTOView;
+import br.com.bmo.taskmanagerlight.api.task.category.CategoryView;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Activity;
-import br.com.bmo.taskmanagerlight.task.category.CategoryView;
 
 public class ActivityDTOView extends TaskDTOView {
 	

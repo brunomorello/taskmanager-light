@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import br.com.bmo.taskmanagerlight.api.task.TaskDTOInput;
+import br.com.bmo.taskmanagerlight.api.task.category.CategoryForm;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Activity;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Status;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Task;
 import br.com.bmo.taskmanagerlight.shared.exceptions.InvalidStatusTransition;
-import br.com.bmo.taskmanagerlight.task.category.CategoryForm;
 
 public class ActivityDTOInput extends TaskDTOInput {
 	

@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanagerlight.task.category;
+package br.com.bmo.taskmanagerlight.api.task.category;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;

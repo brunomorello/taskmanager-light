@@ -25,11 +25,11 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import br.com.bmo.taskmanagerlight.api.task.activity.ActivityDTOInput;
+import br.com.bmo.taskmanagerlight.api.task.category.CategoryForm;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Activity;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Category;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Status;
 import br.com.bmo.taskmanagerlight.shared.util.TaskmanagerTestUtils;
-import br.com.bmo.taskmanagerlight.task.category.CategoryForm;
 
 @SpringBootTest
 @AutoConfigureMockMvc

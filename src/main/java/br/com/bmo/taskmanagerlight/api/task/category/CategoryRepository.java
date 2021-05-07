@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanagerlight.task.category;
+package br.com.bmo.taskmanagerlight.api.task.category;
 
 import java.util.List;
 import java.util.Optional;

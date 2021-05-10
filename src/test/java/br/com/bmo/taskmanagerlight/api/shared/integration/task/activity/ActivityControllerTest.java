@@ -71,7 +71,7 @@ class ActivityControllerTest {
 	@Test
 	void shouldReturn201ToCreateAnActivity() throws Exception {
 		CategoryForm categoryForm = new CategoryForm(ACTIVITY_CATEGORY.getName(), ACTIVITY_CATEGORY.getId().toString());
-		ActivityDTOInput activity = new ActivityDTOInput("Title", "Details", "2021-05-10T09:00:00", categoryForm);
+		ActivityDTOInput activity = new ActivityDTOInput("Title", "Details", "2021-10-10T09:00:00", categoryForm);
 		String payload = TaskmanagerTestUtils.toJsonStr(activity);
 		
 		mockMvc.perform(

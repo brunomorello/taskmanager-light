@@ -15,7 +15,7 @@ import br.com.bmo.taskmanagerlight.api.goods.food.FoodRepositoy;
 import br.com.bmo.taskmanagerlight.shared.domain.goods.Food;
 
 @DataJpaTest
-@ActiveProfiles("test")
+@ActiveProfiles(profiles = { "test", "dev" } )
 class FoodRepositoyTest {
 	
 	@Autowired

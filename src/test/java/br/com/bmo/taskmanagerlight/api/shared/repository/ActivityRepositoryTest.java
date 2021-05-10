@@ -15,7 +15,7 @@ import br.com.bmo.taskmanagerlight.shared.domain.task.Category;
 import br.com.bmo.taskmanagerlight.shared.exceptions.ResourceNotFoundException;
 
 @DataJpaTest
-@ActiveProfiles("test")
+@ActiveProfiles(profiles = { "test", "dev" } )
 class ActivityRepositoryTest {
 
 	@Autowired

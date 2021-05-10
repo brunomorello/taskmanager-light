@@ -12,7 +12,7 @@ import br.com.bmo.taskmanagerlight.shared.domain.goods.Product;
 import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
 
 @DataJpaTest
-@ActiveProfiles("test")
+@ActiveProfiles(profiles = { "test", "dev" } )
 class ProductRepositoryTest {
 	
 	@Autowired

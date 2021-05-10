@@ -28,7 +28,7 @@ class ActivityRepositoryTest {
 	void shouldCreateAnActivty() {
 		Category category = categoryRepository.findById(1L).orElseThrow(() -> new ResourceNotFoundException("cannot find category"));
 		Activity activity = new Activity("Test", "details", category);
-		activity.setDueDate(LocalDateTime.parse("2021-05-10T10:00:00", DateTimeFormatter.ISO_DATE_TIME));
+		activity.setDueDate(LocalDateTime.parse("2022-05-10T10:00:00", DateTimeFormatter.ISO_DATE_TIME));
 		repository.save(activity);
 	}
 

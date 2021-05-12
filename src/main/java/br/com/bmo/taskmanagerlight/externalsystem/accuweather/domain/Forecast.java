@@ -19,5 +19,10 @@ public class Forecast {
 	public List<DailyForecast> getDailyForecast() {
 		return dailyForecast;
 	}
+
+	@Override
+	public String toString() {
+		return "Forecast [headline=" + headline + ", dailyForecast=" + dailyForecast + "]";
+	}
 	
 }

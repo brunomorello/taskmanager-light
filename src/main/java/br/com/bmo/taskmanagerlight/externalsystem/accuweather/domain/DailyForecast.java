@@ -36,5 +36,11 @@ public class DailyForecast {
 	public String getTemperatureUnit() {
 		return temperatureUnit;
 	}
+
+	@Override
+	public String toString() {
+		return "DailyForecast [date=" + date + ", minimumTemperature=" + minimumTemperature + ", maximumTemperature="
+				+ maximumTemperature + ", temperatureUnit=" + temperatureUnit + "]";
+	}
 	
 }

@@ -72,7 +72,7 @@ class ShoppingControllerTest {
 		em.persist(p2);
 		productList.add(new ProductView(p2));		
 		
-		ShoppingDTOInput shoppingTask = new ShoppingDTOInput("Buy items to breakfast", "organic fruits", "2021-05-17T12:00:00", productList);
+		ShoppingDTOInput shoppingTask = new ShoppingDTOInput("Buy items to breakfast", "organic fruits", "2021-05-17T12:00:00", productList, null);
 		String payload = TaskmanagerTestUtils.toJsonStr(shoppingTask);	
 		
 		mockMvc.perform(
@@ -90,7 +90,7 @@ class ShoppingControllerTest {
 		em.persist(p1);
 		productList.add(new ProductView(p1));
 		
-		ShoppingDTOInput shoppingTask = new ShoppingDTOInput(TOBUY.getId().toString(), "NEW TITLE", ".", Status.DOING.toString(), "2021-05-17T12:00:00", productList);
+		ShoppingDTOInput shoppingTask = new ShoppingDTOInput(TOBUY.getId().toString(), "NEW TITLE", ".", Status.DOING.toString(), "2021-05-17T12:00:00", productList, null);
 		String payload = TaskmanagerTestUtils.toJsonStr(shoppingTask);
 		
 		mockMvc.perform(

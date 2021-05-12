@@ -1,6 +1,7 @@
 package br.com.bmo.taskmanagerlight.shared.domain.task;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -25,6 +26,7 @@ public abstract class Task {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
+	@Column(columnDefinition="TEXT")
 	private String details;
 	@Enumerated(EnumType.STRING)
 	private Status status;

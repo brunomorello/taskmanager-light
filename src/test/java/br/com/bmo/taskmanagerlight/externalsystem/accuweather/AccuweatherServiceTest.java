@@ -15,7 +15,7 @@ class AccuweatherServiceTest {
 	
 	private static IpifyService ipifyService = new IpifyService();
 	
-	private AccuweatherService accuweatherService = new AccuweatherService(ipifyService);
+	private AccuweatherService accuweatherService = new AccuweatherService();
 	
 	private static IpifyIP myIp;
 	

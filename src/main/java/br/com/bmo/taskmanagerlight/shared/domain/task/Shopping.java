@@ -11,7 +11,7 @@ import br.com.bmo.taskmanagerlight.shared.domain.goods.Goods;
 
 @Entity
 public class Shopping extends Task {
-
+	
 	@ManyToMany
 	private List<Goods> products = new ArrayList<>();
 

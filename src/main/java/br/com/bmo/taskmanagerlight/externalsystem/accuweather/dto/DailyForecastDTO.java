@@ -38,7 +38,6 @@ public class DailyForecastDTO {
 	}
 
 	public DailyForecast parse() {
-		System.out.println(toString());
 		return new DailyForecast(LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME),
 				new BigDecimal(temperature.getMinimum().getValue()),
 				new BigDecimal(temperature.getMaximum().getValue()), temperature.getUnit());

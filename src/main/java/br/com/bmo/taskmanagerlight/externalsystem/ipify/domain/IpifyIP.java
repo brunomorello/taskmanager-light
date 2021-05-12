@@ -7,6 +7,10 @@ public class IpifyIP {
 
 	private String ip;
 
+	public IpifyIP(String ip) {
+		this.ip = ip;
+	}
+		
 	public IpifyIP() {}
 	
 	public void setIp(String ip) {

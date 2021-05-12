@@ -71,7 +71,7 @@ class ActivityControllerTest {
 	@Test
 	void shouldReturn201ToCreateAnActivity() throws Exception {
 		CategoryForm categoryForm = new CategoryForm(ACTIVITY_CATEGORY.getName(), ACTIVITY_CATEGORY.getId().toString());
-		ActivityDTOInput activity = new ActivityDTOInput("Title", "Details", "2021-05-10T09:00:00", categoryForm);
+		ActivityDTOInput activity = new ActivityDTOInput("Title", "test \n\nThunderstorms in the area this afternoon through late tonight", "2022-05-10T09:00:00", categoryForm);
 		String payload = TaskmanagerTestUtils.toJsonStr(activity);
 		
 		mockMvc.perform(
@@ -83,7 +83,7 @@ class ActivityControllerTest {
 	@Test
 	void shouldReturn200ToUpdateAnActivity() throws Exception {
 		CategoryForm categoryForm = new CategoryForm(ACTIVITY_CATEGORY.getName(), ACTIVITY_CATEGORY.getId().toString());
-		ActivityDTOInput activity = new ActivityDTOInput(TODO.getId().toString(), "Fix kitchen table", "asap", Status.DOING.toString(), "2021-05-10T20:00:00", categoryForm);
+		ActivityDTOInput activity = new ActivityDTOInput(TODO.getId().toString(), "Fix kitchen table", "asap", Status.DOING.toString(), "2022-05-10T20:00:00", categoryForm);
 		
 		String payload = TaskmanagerTestUtils.toJsonStr(activity);
 		

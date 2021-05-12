@@ -32,5 +32,11 @@ public class Headline {
 	public URI getLink() {
 		return link;
 	}
+
+	@Override
+	public String toString() {
+		return "Headline [effectiveDate=" + effectiveDate + ", text=" + text + ", category=" + category + ", link="
+				+ link + "]";
+	}
 	
 }

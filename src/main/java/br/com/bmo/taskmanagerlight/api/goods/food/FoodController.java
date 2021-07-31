@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.bmo.taskmanagerlight.api.goods.GoodsListView;
 import br.com.bmo.taskmanagerlight.api.goods.GoodsView;
 import br.com.bmo.taskmanagerlight.shared.domain.goods.Goods;
 import br.com.bmo.taskmanagerlight.shared.exceptions.ResourceNotFoundException;
@@ -38,15 +38,16 @@ public class FoodController {
 		}
 	}
 
-	@GetMapping("name={name}")
-	public ResponseEntity<GoodsListView> findByNameLike(@PathVariable String name) {
-		// TODO Auto-generated method stub
-		return ResponseEntity.notFound().build();
-	}
-
-	@GetMapping("test")
-	public ResponseEntity<GoodsListView> findByQueryParams() {
-		// TODO Auto-generated method stub
+	@GetMapping("search")
+	public ResponseEntity<Page<FoodView>> findByQueryParams(
+							@RequestParam(defaultValue = "0") Integer pageNum,
+							@RequestParam(defaultValue = "10") Integer pageSize,
+							@RequestParam(defaultValue = "id") String sortBy,
+							@RequestParam MultiValueMap<String, String> queryParams) {
+		if (!queryParams.isEmpty()) {
+			Page<FoodView> result = service.queryFoodsBy(queryParams, pageNum, pageSize, sortBy);
+			return ResponseEntity.ok(result);
+		}
 		return ResponseEntity.notFound().build();
 	}
 

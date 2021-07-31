@@ -6,15 +6,15 @@ import org.springframework.data.domain.Page;
 
 import br.com.bmo.taskmanagerlight.shared.domain.task.Task;
 
-public interface TaskService {
+public interface TaskService<DTOInput, DTOView> {
 
-	public Task create(@Valid TaskDTOInput form);
+	public Task create(@Valid DTOInput form);
 	
-	public TaskDTOView update(@Valid TaskDTOInput form,  Long id);
+	public DTOView update(@Valid DTOInput form,  Long id);
 	
 	public void delete(Long id);
 	
-	public TaskDTOView getTaskById(Long id);
+	public DTOView getTaskById(Long id);
 	
-	public Page<TaskDTOView> getAllTasks(Integer pageNum, Integer pageSize, String sortBy);
+	public Page<DTOView> getAllTasks(Integer pageNum, Integer pageSize, String sortBy);
 }

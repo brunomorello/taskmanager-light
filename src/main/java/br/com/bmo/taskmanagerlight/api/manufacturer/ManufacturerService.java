@@ -1,13 +1,16 @@
 package br.com.bmo.taskmanagerlight.api.manufacturer;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
 import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
 import br.com.bmo.taskmanagerlight.shared.exceptions.ResourceNotFoundException;
@@ -54,9 +57,20 @@ public class ManufacturerService {
 		return new ManufacturerListView(manufacturersFoundByAddress);
 	}
 
-	public ManufacturerListView findByQueryParams(Map<String, String> queryMap) {
-		List<Manufacturer> manufacturers = new ArrayList<>();
-		return new ManufacturerListView(manufacturers);
+
+	public Page<ManufacturerView> queryManufacturerBy(MultiValueMap<String, String> queryParams, Integer pageNum, Integer pageSize,
+			String sortBy) {
+		
+		PageRequest paging = PageRequest.of(pageNum, pageSize, Sort.by(sortBy));
+		ManufacturerSpecificationBuilder specBuilder = new ManufacturerSpecificationBuilder();
+		Specification<Manufacturer> spec = specBuilder.with(queryParams.toSingleValueMap()).build();
+		
+		Page<Manufacturer> result = repository.findAll(spec, paging);
+		
+		if (result.hasContent())
+			return result.map(viewFactory::factory);
+		
+		return null;
 	}
 	
 }

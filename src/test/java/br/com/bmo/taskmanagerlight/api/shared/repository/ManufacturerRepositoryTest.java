@@ -11,9 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.bmo.taskmanagerlight.api.manufacturer.ManufacturerRepository;
+import br.com.bmo.taskmanagerlight.api.manufacturer.ManufacturerSpecificationBuilder;
 import br.com.bmo.taskmanagerlight.shared.domain.manufacturer.Manufacturer;
 
 @DataJpaTest
@@ -22,16 +24,16 @@ public class ManufacturerRepositoryTest {
 
 	@Autowired
 	private ManufacturerRepository repository;
-	
+
 	@Autowired
 	private TestEntityManager EM;
-	
+
 	@BeforeEach
 	void setup() {
 		Manufacturer acme1 = new Manufacturer("Acme 1 S.A.", "AC1", "Av. Paulista");
 		Manufacturer acme2 = new Manufacturer("Manufacturer Acme 2 LTDA", "Acme", "Paulista Avenue");
 		Manufacturer acme3 = new Manufacturer("Acme LOL");
-		
+
 		EM.persist(acme1);
 		EM.persist(acme2);
 		EM.persist(acme3);
@@ -43,20 +45,20 @@ public class ManufacturerRepositoryTest {
 		assertNotNull(acmeList.get(0));
 		assertEquals(acmeList.get(0).getDisplayName(), "AC1");
 	}
-	
+
 	@Test
 	void shouldFindManufacturerByFormalName() {
 		Optional<Manufacturer> acme = repository.findByFormalName("Manufacturer Acme 2 LTDA");
 		assertNotNull(acme.get());
 		assertEquals(acme.get().getFormalName(), "Manufacturer Acme 2 LTDA");
 	}
-	
+
 	@Test
 	void shouldFindManufacturersByPaulistaAddress() {
 		List<Manufacturer> manufactureresFound = repository.findByAddressLike("Paulista");
 		manufactureresFound.forEach(manufacturer -> assertEquals(manufacturer.getAddress().contains("Paulista"), true));
 	}
-	
+
 	@Test
 	void shouldUpdateManufacturer() {
 		Manufacturer manufacturer = repository.findByDisplayNameLike("AC1").get(0);
@@ -65,4 +67,13 @@ public class ManufacturerRepositoryTest {
 		assertEquals(manufacturer.getDisplayName(), "Test");
 	}
 
+	@Test
+	void shouldFindManuafcturerByStreetUsingSpec() {
+		Specification<Manufacturer> spec = new ManufacturerSpecificationBuilder()
+				.with("address", "=", "Paulista")
+				.build();
+		List<Manufacturer> result = repository.findAll(spec);
+		assertEquals(result.size(), 2);
+	}
+	
 }

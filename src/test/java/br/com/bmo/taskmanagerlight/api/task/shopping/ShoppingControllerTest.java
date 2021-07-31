@@ -72,12 +72,13 @@ class ShoppingControllerTest {
 		em.persist(p2);
 		productList.add(new ProductView(p2));		
 		
-		ShoppingDTOInput shoppingTask = new ShoppingDTOInput("Buy items to breakfast", "organic fruits", "2021-05-17T12:00:00", productList, null);
+		ShoppingDTOInput shoppingTask = new ShoppingDTOInput("Buy items to breakfast", "organic fruits", "2021-05-17T12:00:00", productList);
 		String payload = TaskmanagerTestUtils.toJsonStr(shoppingTask);	
 		
 		mockMvc.perform(
 				post(BASE_URI)
 					.content(payload)
+					.header("customerIp", "189.120.77.134")
 					.contentType(MediaType.APPLICATION_JSON))
 			.andDo(log())
 			.andExpect(status().isCreated());
@@ -90,7 +91,7 @@ class ShoppingControllerTest {
 		em.persist(p1);
 		productList.add(new ProductView(p1));
 		
-		ShoppingDTOInput shoppingTask = new ShoppingDTOInput(TOBUY.getId().toString(), "NEW TITLE", ".", Status.DOING.toString(), "2021-05-17T12:00:00", productList, null);
+		ShoppingDTOInput shoppingTask = new ShoppingDTOInput(TOBUY.getId().toString(), "NEW TITLE", ".", Status.DOING.toString(), "2021-05-17T12:00:00", productList);
 		String payload = TaskmanagerTestUtils.toJsonStr(shoppingTask);
 		
 		mockMvc.perform(

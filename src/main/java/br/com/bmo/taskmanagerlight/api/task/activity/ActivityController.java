@@ -1,12 +1,15 @@
 package br.com.bmo.taskmanagerlight.api.task.activity;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +41,7 @@ public class ActivityController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<TaskDTOView>> getAllTasls(
+	public ResponseEntity<Page<ActivityDTOView>> getAllTasks(
 			@RequestParam(defaultValue = "0") Integer pageNum, 
 			@RequestParam(defaultValue = "10") Integer pageSize, 
 			@RequestParam(defaultValue = "id") String sortBy) {
@@ -61,6 +64,24 @@ public class ActivityController {
 	@PatchMapping("{id}")
 	public ResponseEntity<TaskDTOView> replaceCategory(@RequestBody Long categoryId, @PathVariable Long id) {
 		return null;
+	}
+	
+	@GetMapping("search")
+	public ResponseEntity<Page<ActivityDTOView>> findByQueryParams(
+									@RequestParam(defaultValue = "0") Integer pageNum,
+									@RequestParam(defaultValue = "10") Integer pageSize,
+									@RequestParam(defaultValue = "id") String orderBy,
+									@RequestParam MultiValueMap<String, String> queryParams) {
+		if (!queryParams.isEmpty()) {
+			Page<ActivityDTOView> result = service.queryTasksBy(queryParams, pageNum, pageSize, orderBy);
+			return ResponseEntity.ok(result);
+		}
+		return ResponseEntity.badRequest().build();
+	}
+	
+	@GetMapping("category")
+	public List<ActivityDTOView> findByCategory(@Param(value = "category") String category) {
+		return service.getActivitiesByCategory(category);
 	}
 	
 }

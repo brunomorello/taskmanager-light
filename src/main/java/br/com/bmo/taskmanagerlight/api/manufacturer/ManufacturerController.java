@@ -1,12 +1,13 @@
 package br.com.bmo.taskmanagerlight.api.manufacturer;
 
 import java.net.URI;
-import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,13 +33,7 @@ public class ManufacturerController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-
-	@GetMapping("/search")
-	public ResponseEntity<ManufacturerListView> findQueryParams(@RequestParam Map<String, String> queryMap) {
-		service.findByQueryParams(queryMap);
-		return ResponseEntity.notFound().build();
-	}
-
+	
 	@PostMapping("/")
 	public ResponseEntity<?> create(@Valid @RequestBody ManufacturerForm form, UriComponentsBuilder uriBuilder) {
 

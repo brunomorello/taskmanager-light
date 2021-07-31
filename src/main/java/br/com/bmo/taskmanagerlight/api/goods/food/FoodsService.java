@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
 import br.com.bmo.taskmanagerlight.api.goods.GoodsForm;
 import br.com.bmo.taskmanagerlight.api.goods.GoodsService;
@@ -60,6 +62,18 @@ public class FoodsService implements GoodsService {
 		}			
 		
 		return allGoods;
+	}
+	
+	public Page<FoodView> queryFoodsBy(MultiValueMap<String, String> queryParams, Integer pageNum,
+			Integer pageSize, String sortBy) {
+		
+		PageRequest paging = PageRequest.of(pageNum, pageSize, Sort.by(sortBy));
+		FoodSpecificationsBuilder specBuilder = new FoodSpecificationsBuilder();
+		Specification<Food> spec = specBuilder.with(queryParams.toSingleValueMap()).build();
+		
+		repository.findAll(spec, paging);
+		
+		return null;
 	}
 
 }

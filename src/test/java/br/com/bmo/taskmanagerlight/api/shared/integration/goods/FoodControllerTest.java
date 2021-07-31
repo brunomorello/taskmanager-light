@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 
 import javax.transaction.Transactional;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,16 @@ public class FoodControllerTest {
 	@BeforeEach
 	void setup() {
 		FOOD = new Food("Beans", new BigDecimal("6.99"));
-		FOOD.setExpirationDate(LocalDate.parse("2021-05-15", DateTimeFormatter.ISO_DATE));
+		FOOD.setExpirationDate(LocalDate.parse("2022-05-15", DateTimeFormatter.ISO_DATE));
 		em.persist(FOOD);
+		
+		Food orangeJuice = new Food("Orange Juice", new BigDecimal("12.50"));
+		orangeJuice.setExpirationDate(LocalDate.parse("2022-05-01", DateTimeFormatter.ISO_DATE));
+		em.persist(orangeJuice);
+		
+		Food orange = new Food("Orange", new BigDecimal("2"));
+		orange.setExpirationDate(LocalDate.parse("2022-01-01", DateTimeFormatter.ISO_DATE));
+		em.persist(orange);
 	}
 	
 	@Test
@@ -97,5 +106,14 @@ public class FoodControllerTest {
 			.andExpect(jsonPath("$.name", equalTo("Rice")))
 			.andExpect(jsonPath("$.price", equalTo("22")))
 			.andExpect(jsonPath("$.expirationDate", equalTo("2021-06-01")));
+	}
+	
+	@Test
+	void shouldReturn200ToFindFoodByName() throws Exception {
+		mockMvc.perform(get(BASE_URI+ "search").queryParam("name", "Orange"))
+			.andDo(log())
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.content[0].name", Matchers.containsString("Orange")));
+			
 	}
 }

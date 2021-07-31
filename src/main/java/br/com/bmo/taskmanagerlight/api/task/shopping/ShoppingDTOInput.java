@@ -18,18 +18,14 @@ public class ShoppingDTOInput extends TaskDTOInput {
 	
 	private IpifyIP ip;
 
-	public ShoppingDTOInput(String id, String title, String details, String status, String dueDate, List<ProductView> products, String ip) {
+	public ShoppingDTOInput(String id, String title, String details, String status, String dueDate, List<ProductView> products) {
 		super(id, title, details, status, dueDate);
 		this.products = products;
-		if (ip != null && !ip.isEmpty())
-			this.ip = new IpifyIP(ip);
 	}
 	
-	public ShoppingDTOInput(String title, String details, String dueDate, List<ProductView> products, String ip) {
+	public ShoppingDTOInput(String title, String details, String dueDate, List<ProductView> products) {
 		super(title, details, dueDate);
 		this.products = products;
-		if (ip != null && !ip.isEmpty())
-			this.ip = new IpifyIP(ip);
 	}
 	
 	public ShoppingDTOInput() {
@@ -37,6 +33,11 @@ public class ShoppingDTOInput extends TaskDTOInput {
 
 	public List<ProductView> getProducts() {
 		return products;
+	}
+	
+	public void setIp(String ip) {
+		if (ip != null && !ip.isBlank())
+			this.ip = new IpifyIP(ip);
 	}
 	
 	public IpifyIP getIp() {

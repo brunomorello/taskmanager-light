@@ -1,6 +1,7 @@
 package br.com.bmo.taskmanagerlight.api.task.shopping;
 
 import java.net.URI;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +36,7 @@ public class ShoppingController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<TaskDTOView>> getAllTasks(
+	public ResponseEntity<Page<ShoppingDTOView>> getAllTasks(
 			@RequestParam(defaultValue = "0") Integer pageNum, 
 			@RequestParam(defaultValue = "10") Integer pageSize, 
 			@RequestParam(defaultValue = "id") String sortBy) {
@@ -42,10 +44,17 @@ public class ShoppingController {
 	}
 
 	@PostMapping
-	public ResponseEntity<ShoppingDTOView> create(@Valid @RequestBody ShoppingDTOInput form, UriComponentsBuilder uriBuilder) {
-		Task activity = service.create(form);
-		URI uri = uriBuilder.path("/api/task/shopping/{id}").buildAndExpand(activity.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+	public ResponseEntity<ShoppingDTOView> create(@Valid @RequestBody ShoppingDTOInput form, UriComponentsBuilder uriBuilder, @RequestHeader Map<String, String> headers) {
+		
+		form.setIp(headers.get("customerIp"));
+
+		try {
+			Task activity = service.create(form);
+			URI uri = uriBuilder.path("/api/task/shopping/{id}").buildAndExpand(activity.getId()).toUri();
+			return ResponseEntity.created(uri).build();
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	@PutMapping("{id}")

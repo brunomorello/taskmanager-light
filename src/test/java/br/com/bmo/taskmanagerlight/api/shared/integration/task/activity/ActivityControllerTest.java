@@ -106,4 +106,20 @@ class ActivityControllerTest {
 			.andExpect(jsonPath("$.content[0].title", equalTo(TODO.getTitle())));
 	}
 	
+	@Test
+	void shouldReturn200ToFindActivitiesByCategory() throws Exception {
+			
+		mockMvc.perform(get(BASE_URI + "category").param("category", ACTIVITY_CATEGORY.getName()))
+			.andDo(log())
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$[0].title", equalTo(TODO.getTitle())));
+	}
+	
+	@Test
+	void shouldReturn200ToFindActivitiesByDueDate() throws Exception {
+		mockMvc.perform(get(BASE_URI + "search").queryParam("dueDate", "2021-05-20T10:00:00"))
+			.andDo(log())
+			.andExpect(status().isOk());
+	}
+	
 }

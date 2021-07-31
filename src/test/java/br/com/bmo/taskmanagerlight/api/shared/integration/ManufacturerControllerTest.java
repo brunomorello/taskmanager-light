@@ -46,6 +46,12 @@ public class ManufacturerControllerTest {
 	void setup() {
 		ACME = new Manufacturer("Acme S.A.", "ACME", "Av. Paulista");
 		EM.persist(ACME);
+		
+		Manufacturer m1 = new Manufacturer("starbucks", "starbucks", "Av. Paulista");
+		EM.persist(m1);
+
+		Manufacturer m2 = new Manufacturer("Extra", "Extra Supermarket", "Av Brigadeiro Luiz Antonio");
+		EM.persist(m2);
 	}
 
 	@Test
@@ -60,16 +66,14 @@ public class ManufacturerControllerTest {
 	}
 
 	void shouldFindManufactureByDisplayName() throws Exception {
-		//TBD
+		// TBD
 		mockMvc.perform(get(BASE_URI).param("displayName", ACME.getDisplayName())).andDo(log())
 				.andExpect(status().isOk()).andExpect(jsonPath("$.displayName", equalTo(ACME.getDisplayName())));
 	}
-	
+
 	void shouldFindManufacturersByAddress() throws Exception {
-		//TBD
-		mockMvc.perform(get(BASE_URI).param("address", "Paulista"))
-			.andDo(log())
-			.andExpect(status().isOk());
+		// TBD
+		mockMvc.perform(get(BASE_URI).param("address", "Paulista")).andDo(log()).andExpect(status().isOk());
 	}
 
 	@Test
@@ -89,8 +93,22 @@ public class ManufacturerControllerTest {
 
 		mockMvc.perform(
 				put(BASE_URI.concat(ACME.getId().toString())).content(payload).contentType(MediaType.APPLICATION_JSON))
-			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.displayName", equalTo(ACME.getDisplayName())))
-			.andExpect(jsonPath("$.address", equalTo(ACME.getAddress())));
+				.andExpect(status().isOk()).andExpect(jsonPath("$.displayName", equalTo(ACME.getDisplayName())))
+				.andExpect(jsonPath("$.address", equalTo(ACME.getAddress())));
+	}
+
+	@Test
+	void shouldReturn400ToSearchManufacturerWithNoQueryParam() throws Exception {
+		mockMvc.perform(get(BASE_URI + "search")).andDo(log()).andExpect(status().isBadRequest());
+	}
+
+	@Test
+	void shouldReturn200ToFindManufacturerByNameAndAddress() throws Exception {
+		mockMvc.perform(get(BASE_URI + "search")
+							.queryParam("displayName", "starbucks")
+							.queryParam("address", "Paulista"))
+				.andDo(log())
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.content[0].displayName", equalTo("starbucks")));
 	}
 }

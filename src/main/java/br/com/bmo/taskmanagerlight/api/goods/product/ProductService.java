@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
 import br.com.bmo.taskmanagerlight.api.goods.GoodsForm;
 import br.com.bmo.taskmanagerlight.api.goods.GoodsService;
@@ -59,6 +61,21 @@ public class ProductService implements GoodsService {
 		}		
 		
 		return allGoods;
+	}
+
+	public Page<ProductView> queryProductsBy(MultiValueMap<String, String> queryParams, Integer pageNum,
+			Integer pageSize, String sortBy) {
+		
+		PageRequest paging = PageRequest.of(pageNum, pageSize, Sort.by(sortBy));
+		ProductSpecificationBuilder specBuilder = new ProductSpecificationBuilder();
+		Specification<Product> spec = specBuilder.with(queryParams.toSingleValueMap()).build();
+		
+		Page<Product> allProducts = repository.findAll(spec, paging);
+		
+		if (allProducts.hasContent())
+			return allProducts.map(viewFactory::factory);
+		
+		return null;
 	}
 
 }

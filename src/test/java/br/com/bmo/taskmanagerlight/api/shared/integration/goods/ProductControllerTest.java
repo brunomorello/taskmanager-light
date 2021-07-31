@@ -52,8 +52,14 @@ class ProductControllerTest {
 	void setup() {
 		IKEA = new Manufacturer("Ikea");
 		em.persist(IKEA);
-		SOFA = new Product("Table", new BigDecimal("1000.91"), IKEA);
+		SOFA = new Product("Sofa", new BigDecimal("1000.91"), IKEA);
 		em.persist(SOFA);
+		
+		Product table = new Product("Table", new BigDecimal("500"), null);
+		em.persist(table);
+		
+		Product sofa2 = new Product("Sofa", new BigDecimal("999"), null);
+		em.persist(sofa2);
 	}
 
 	@Test
@@ -98,6 +104,24 @@ class ProductControllerTest {
 				.andExpect(jsonPath("$.price", equalTo("840.30")))
 				.andExpect(jsonPath("$.name", equalTo("Table")))
 				.andExpect(jsonPath("$.manufacturer.displayName", equalTo("Ikea")));
+	}
+	
+	@Test
+	void shouldReturn200ToFindProductByName() throws Exception {
+		mockMvc.perform(get(BASE_URI + "/search").queryParam("name", "=Sofa"))
+			.andDo(log())
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.content[0].name", equalTo("Sofa")))
+			.andExpect(jsonPath("$.content[1].name", equalTo("Sofa")));
+	}
+	
+	@Test
+	void shouldReturn200ToFindProductByNameAndPriceLowerThan() throws Exception {
+		mockMvc.perform(get(BASE_URI + "search").queryParam("name", "Sofa").queryParam("price", "<1000"))
+			.andDo(log())
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.content[0].price", equalTo("999")))
+			.andExpect(jsonPath("$.content[0].name", equalTo("Sofa")));
 	}
 
 }

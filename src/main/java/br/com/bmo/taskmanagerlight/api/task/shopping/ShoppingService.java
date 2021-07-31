@@ -1,7 +1,5 @@
 package br.com.bmo.taskmanagerlight.api.task.shopping;
 
-import java.time.format.DateTimeFormatter;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +8,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import br.com.bmo.taskmanagerlight.api.task.TaskDTOInput;
-import br.com.bmo.taskmanagerlight.api.task.TaskDTOView;
 import br.com.bmo.taskmanagerlight.api.task.TaskService;
 import br.com.bmo.taskmanagerlight.externalsystem.accuweather.AccuweatherService;
 import br.com.bmo.taskmanagerlight.externalsystem.accuweather.domain.City;
 import br.com.bmo.taskmanagerlight.externalsystem.accuweather.domain.Forecast;
-import br.com.bmo.taskmanagerlight.externalsystem.ipify.IpifyService;
 import br.com.bmo.taskmanagerlight.externalsystem.ipify.domain.IpifyIP;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Shopping;
 import br.com.bmo.taskmanagerlight.shared.domain.task.Task;
 import br.com.bmo.taskmanagerlight.shared.exceptions.ResourceNotFoundException;
 
 @Service
-public class ShoppingService implements TaskService {
+public class ShoppingService implements TaskService<ShoppingDTOInput, ShoppingDTOView> {
 	
 	@Autowired
 	private ShoppingRepository repository;
@@ -31,18 +26,15 @@ public class ShoppingService implements TaskService {
 	@Autowired
 	private AccuweatherService accuweatherService;
 	
-	@Autowired
-	private IpifyService ipifyService;
-
 	@Override
-	public Task create(@Valid TaskDTOInput form) {
+	public Task create(@Valid ShoppingDTOInput form) {
 		Shopping shoppingTask = (Shopping) form.parse();
+		City cityByIp;
+		cityByIp = getLocationByIp(form.getIp());
+		
+		shoppingTask.setDetails(shoppingTask.getDetails() + "\n" + parseForecast(accuweatherService.get5dayForecastByLocationKey(cityByIp.getKey())));
 		
 		try {
-			City cityByIp;
-			cityByIp = getLocationByIp(ipifyService.getMyIp());
-			
-			shoppingTask.setDetails(shoppingTask.getDetails() + "\n" + parseForecast(accuweatherService.get5dayForecastByLocationKey(cityByIp.getKey())));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,7 +57,7 @@ public class ShoppingService implements TaskService {
 	}
 
 	@Override
-	public TaskDTOView update(@Valid TaskDTOInput form, Long id) {
+	public ShoppingDTOView update(@Valid ShoppingDTOInput form, Long id) {
 		Shopping shoppingTask = (Shopping) form.parse();
 		shoppingTask.setId(id);
 		return new ShoppingDTOView(repository.save(shoppingTask));
@@ -77,12 +69,12 @@ public class ShoppingService implements TaskService {
 	}
 
 	@Override
-	public TaskDTOView getTaskById(Long id) {
+	public ShoppingDTOView getTaskById(Long id) {
 		return repository.findById(id).map(task -> new ShoppingDTOView(task)).orElseThrow(() -> new ResourceNotFoundException("Cannot find Shopping Task by " + id));
 	}
 
 	@Override
-	public Page<TaskDTOView> getAllTasks(Integer pageNum, Integer pageSize, String sortBy) {
+	public Page<ShoppingDTOView> getAllTasks(Integer pageNum, Integer pageSize, String sortBy) {
 		PageRequest paging = PageRequest.of(pageNum, pageSize, Sort.by(sortBy));
 		Page<Shopping> pagedResult = repository.findAll(paging);
 		

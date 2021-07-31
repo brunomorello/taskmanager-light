@@ -79,5 +79,12 @@ public class Product extends Goods {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Product [manufacturer=" + manufacturer + ", getId()=" + getId() + ", getName()=" + getName()
+				+ ", getPrice()=" + getPrice() + ", getClass()=" + getClass() + ", toString()=" + super.toString()
+				+ "]";
+	}
+
 }
